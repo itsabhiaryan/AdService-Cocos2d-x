@@ -1,6 +1,8 @@
 package org.cocos2dx.cpp;
 
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+
 /**
  * (c) 2017 Abhishek Aryan
  *
@@ -12,7 +14,7 @@ public interface Ad {
 
 
     void showAd(boolean isTop,boolean isBottom);
-    void embedView(RelativeLayout layout);
+    void embedView(FrameLayout layout);
 
     void showOrLoadInterstitial();
     boolean showVideoAd(boolean isReward);
