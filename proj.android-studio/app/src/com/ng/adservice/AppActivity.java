@@ -1,10 +1,6 @@
-package org.cocos2dx.cpp;
+package com.ng.adservice;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 

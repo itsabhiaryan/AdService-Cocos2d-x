@@ -1,7 +1,6 @@
-package org.cocos2dx.cpp;
+package com.ng.adservice;
 
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 /**
  * (c) 2017 Abhishek Aryan
