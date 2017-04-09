@@ -1,12 +1,14 @@
 package com.ng.adservice;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 public class AppActivity extends Cocos2dxActivity {
 
-    private Ad ad;
+    static Ad ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,4 +49,5 @@ public class AppActivity extends Cocos2dxActivity {
         super.onStop();
         ad.stop();
     }
+
 }

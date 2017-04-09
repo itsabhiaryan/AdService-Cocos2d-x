@@ -15,7 +15,8 @@ public interface Ad {
     void showAd(boolean isTop,boolean isBottom);
     void embedView(FrameLayout layout);
 
-    void showOrLoadInterstitial();
+    boolean isInterstitialReady();
+    boolean showOrLoadInterstitial();
     boolean showVideoAd(boolean isReward);
 
     void destroy();

@@ -3,6 +3,7 @@ package com.ng.adservice;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -15,6 +16,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * (c) 2017 Abhishek Aryan
@@ -29,9 +33,9 @@ public class AdMobHelper implements Ad {
     private AdView topView,bottomView;
     private InterstitialAd interstitialAd;
 
-    private static final String TopAdUnitId="ca-app-pub-xxxxxxxxxxxxxx";
-    private static final String BottomAdUnitId="ca-app-pub-xxxxxxxxx";
-    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx";
+    private static final String TopAdUnitId="ca-app-pub-xxxxxxxxxx";
+    private static final String BottomAdUnitId="ca-app-pub-xxxxxxxxxxx";
+    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-xxxxxxxxxx";
 
     private final int SHOW_TOP_ADS = 0;
     private final int SHOW_BOTTOM_ADS = 1;
@@ -109,6 +113,7 @@ public class AdMobHelper implements Ad {
                 Toast.makeText(activity.getApplicationContext(), "Closed Interstitial", Toast.LENGTH_SHORT).show();
             }
         });
+        loadIntersitialAd();
     }
 
     @Override
@@ -158,8 +163,61 @@ public class AdMobHelper implements Ad {
     }
 
     @Override
-    public void showOrLoadInterstitial() {
+    public boolean isInterstitialReady() {
+        return interstitialAd.isLoaded();
+    }
 
+    @Override
+    public boolean showOrLoadInterstitial() {
+
+        try {
+//            activity.runOnUiThread(new Runnable() {
+//                public void run() {
+//                    if (interstitialAd.isLoaded()) {
+//                        isInterstitialShow=true;
+//                        interstitialAd.show();
+//                        Toast.makeText(activity.getApplicationContext(), "Showing Interstitial", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                    else {
+//                        loadIntersitialAd();
+//                        Toast.makeText(activity.getApplicationContext(), "Loading Interstitial", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+
+
+            FutureTask<Boolean> futureResult = new FutureTask<Boolean>(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+
+                    if (interstitialAd.isLoaded()) {
+                        interstitialAd.show();
+                        Toast.makeText(activity.getApplicationContext(), "Showing Interstitial", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    else {
+                        loadIntersitialAd();
+                        Toast.makeText(activity.getApplicationContext(), "Loading Interstitial", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                }
+            });
+
+
+        activity.runOnUiThread(futureResult);
+        return futureResult.get();
+
+        } catch (Exception e) {
+            Log.e("AdMobHelper","Exception in show Interstitial Ad",e);
+            return false;
+        }
+    }
+
+    private void loadIntersitialAd(){
+
+        AdRequest interstitialRequest = new AdRequest.Builder().build();
+        interstitialAd.loadAd(interstitialRequest);
     }
 
     @Override

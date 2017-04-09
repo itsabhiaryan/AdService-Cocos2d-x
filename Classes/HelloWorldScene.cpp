@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "AdService.hpp"
 
 USING_NS_CC;
 
@@ -63,9 +64,27 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
+    auto touch_listener=EventListenerTouchOneByOne::create();
+    touch_listener->onTouchBegan=[=](Touch* touch,Event* event){
+        
+        int random1=random(0,1);
+        int random2=random(0,1);
+        
+        CCLOG("%d,....%d",random1,random2);
+        
+        Ad::showAd(random1==0?true:false, random2==0?true:false);
+        sprite->setRotation(sprite->getRotation()+90);
+        
+        bool isShow=Ad::showInterstitial();
+        
+        CCLOG("INTERESTITIAL %s",isShow==true?"VIsible":"Not visible");
+        
+        return false;};
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(touch_listener, this);
+    
     return true;
 }
-
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
