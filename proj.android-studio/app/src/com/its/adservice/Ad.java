@@ -1,4 +1,4 @@
-package com.ng.adservice;
+package com.its.adservice;
 
 import android.widget.FrameLayout;
 
@@ -17,6 +17,8 @@ public interface Ad {
 
     boolean isInterstitialReady();
     boolean showOrLoadInterstitial();
+
+    boolean isVideoAvailable(boolean isReward);
     boolean showVideoAd(boolean isReward);
 
     void destroy();

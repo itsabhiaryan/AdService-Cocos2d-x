@@ -1,8 +1,6 @@
-package com.ng.adservice;
+package com.its.adservice;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
@@ -14,9 +12,8 @@ public class AppActivity extends Cocos2dxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ad=new AdMobHelper(this);
+        ad=new AdMobFirebaseHelper(this);
         ad.embedView(mFrameLayout);
-
     }
 
     @Override

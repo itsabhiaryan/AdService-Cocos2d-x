@@ -5,8 +5,8 @@ android {
     buildToolsVersion "25.0.0"
 
     defaultConfig {
-        applicationId "com.ng.adservice"
-        minSdkVersion 10
+        applicationId "com.its.adservice"
+        minSdkVersion 14
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
@@ -86,5 +86,17 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':libcocos2dx')
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+
+
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-ads:10.2.1'
+
+    // firebase ad or google play service ad
+
+    //compile 'com.google.android.gms:play-services-ads:10.0.1'
+
+
+
 }
+
+apply plugin: 'com.google.gms.google-services'

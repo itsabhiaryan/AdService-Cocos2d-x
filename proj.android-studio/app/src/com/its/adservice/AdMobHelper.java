@@ -1,4 +1,4 @@
-package com.ng.adservice;
+package com.its.adservice;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -29,13 +29,13 @@ import java.util.concurrent.FutureTask;
 
 public class AdMobHelper implements Ad {
 
-    private Activity activity;
+    protected Activity activity;
     private AdView topView,bottomView;
     private InterstitialAd interstitialAd;
 
-    private static final String TopAdUnitId="ca-app-pub-xxxxxxxxxx";
-    private static final String BottomAdUnitId="ca-app-pub-xxxxxxxxxxx";
-    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-xxxxxxxxxx";
+    private static final String TopAdUnitId="ca-app-pub-9155944417196748/4834415914";
+    private static final String BottomAdUnitId="ca-app-pub-9155944417196748/4834415914";
+    private static final String AD_UNIT_ID_INTERSTITIAL = "ca-app-pub-9155944417196748/4602999515";
 
     private final int SHOW_TOP_ADS = 0;
     private final int SHOW_BOTTOM_ADS = 1;
@@ -77,7 +77,16 @@ public class AdMobHelper implements Ad {
 
 
     public AdMobHelper(Activity activity){
+        this(activity,true);
+    }
+
+    protected AdMobHelper(Activity activity,boolean b){
+
         this.activity=activity;
+        if(b) initView();
+    }
+
+    protected void initView(){
 
         topView = new AdView(activity);
         topView.setAdSize(AdSize.BANNER);
@@ -96,8 +105,8 @@ public class AdMobHelper implements Ad {
         bottomView.loadAd(adRequestBuilder1.build());
 
         crateInterestial();
-
     }
+
 
     public void crateInterestial(){
 
@@ -204,7 +213,6 @@ public class AdMobHelper implements Ad {
                 }
             });
 
-
         activity.runOnUiThread(futureResult);
         return futureResult.get();
 
@@ -212,6 +220,11 @@ public class AdMobHelper implements Ad {
             Log.e("AdMobHelper","Exception in show Interstitial Ad",e);
             return false;
         }
+    }
+
+    @Override
+    public boolean isVideoAvailable(boolean isReward) {
+        return false;
     }
 
     private void loadIntersitialAd(){

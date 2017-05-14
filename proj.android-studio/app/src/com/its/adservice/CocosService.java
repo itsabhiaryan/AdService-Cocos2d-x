@@ -1,4 +1,4 @@
-package com.ng.adservice;
+package com.its.adservice;
 
 /**
  * (c) 2017 Abhishek Aryan
@@ -20,5 +20,12 @@ public class CocosService {
         return AppActivity.ad.isInterstitialReady();
     }
 
+    public static boolean isVideoAvailable(boolean isReward){
+        return AppActivity.ad.isVideoAvailable(isReward);
+    }
+
+    public static boolean showVideo(boolean isReward){
+        return AppActivity.ad.showVideoAd(isReward);
+    }
 
 }

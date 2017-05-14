@@ -75,7 +75,9 @@ bool HelloWorld::init()
         Ad::showAd(random1==0?true:false, random2==0?true:false);
         sprite->setRotation(sprite->getRotation()+90);
         
-        bool isShow=Ad::showInterstitial();
+        //Ad::showAd(<#bool isTop#>, <#bool isBottom#>)
+        
+        bool isShow=Ad::showVideoAd(true);
         
         CCLOG("INTERESTITIAL %s",isShow==true?"VIsible":"Not visible");
         
